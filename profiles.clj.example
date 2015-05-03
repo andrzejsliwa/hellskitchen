@@ -1,0 +1,29 @@
+{:user {:plugins      [[cider/cider-nrepl "0.9.0-SNAPSHOT"]]
+        :dependencies [[org.clojure/tools.nrepl "0.2.10"]
+                       [im.chit/vinyasa "0.3.4"]
+                       [org.clojars.gjahad/debug-repl "0.3.3"]
+                       [io.aviso/pretty "0.1.8"]
+                       [spyscope "0.1.5"]
+                       [difform "1.1.2"]
+                       [leiningen #=(leiningen.core.main/leiningen-version)]]
+        :injections
+        [(require '[vinyasa.inject :as inject])
+         (inject/in
+          ;; defautl injected namespace '.'
+          [vinyasa.inject :refer [inject [in inject-in]]]
+          [vinyasa.pull pull]
+          [cemerick.pomegranate add-classpath get-classpath resources]
+
+          ;; inject in clojure.core
+          clojure.core
+          [vinyasa.lein :exclude [*project*]]
+          [vinyasa.reflection .> .? .* .% .%> .& .>ns .>var]
+
+          ;; inject in clojure.core with prefix '>'
+          clojure.core >
+          [clojure.repl apropos dir doc find-doc source [root-cause cause]]
+          [clojure.pprint pprint pp]
+          [com.georgejahad.difform difform]
+          [alex-and-georges.debug-repl debug-repl])
+         (require 'spyscope.core)]
+}}

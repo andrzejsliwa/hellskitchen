@@ -6,4 +6,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]]
   :main ^:skip-aot hellskitchen.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :dev {:source-paths ["dev"]
+                   :dependencies [[org.clojure/tools.namespace "0.2.10"]
+                                  [com.stuartsierra/component "0.2.3"]]}})
