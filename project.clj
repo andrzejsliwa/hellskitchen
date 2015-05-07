@@ -9,4 +9,5 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :dev {:source-paths ["dev"]
-                   :dependencies [[org.clojure/tools.namespace "0.2.10"]]}})
+                   :dependencies [[org.clojure/tools.namespace "0.2.10"]
+                                  [midje "1.6.3"]]}})
